@@ -1,0 +1,14 @@
+[Unit]
+Description=rgbee
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+ExecStartPre=/usr/bin/python /opt/rgbee/script/initial.py
+ExecStartPre=/bin/sh -c '/usr/bin/python /opt/rgbee/script/sweep_rainbow.py &'
+ExecStart=/usr/bin/node /opt/rgbee/server.js
+
+[Install]
+WantedBy=multi-user.target
